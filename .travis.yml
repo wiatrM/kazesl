@@ -1,0 +1,25 @@
+# Ubuntu 14.04 Trusty
+dist: trusty
+sudo: required
+
+language: cpp
+
+services:
+  - docker
+
+before_install:
+  - sudo apt-get update
+  - docker pull kazeorg/kazesl
+  - docker ps -a
+  - sudo mkdir shared
+
+# Build script
+script:
+  - docker run -v "$PWD/:/app:rw" kazeorg/kazesl /bin/bash -c "bash /app/scripts/build.sh --debug --ut"
+  - docker run -v "$PWD/:/app:rw" kazeorg/kazesl /bin/bash -c "bash /app/scripts/coverage.sh"
+  - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
+
+# Turn off email notifications
+notifications:
+  email: false
+  slack: kazeorg:gsWBmLZxIiP1gp38fQrSWySe

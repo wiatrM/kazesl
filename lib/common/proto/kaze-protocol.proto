@@ -1,0 +1,13 @@
+syntax = "proto3";
+package protocol;
+
+
+enum MsgType
+{
+  DISCOVERY               = 0;
+  PING                    = 1;
+}
+
+message MPdiscovery {
+  string query = 1;
+}

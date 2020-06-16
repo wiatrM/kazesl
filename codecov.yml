@@ -1,0 +1,10 @@
+codecov:
+  branch: develop
+  ci:
+  - !appveyor #ignore appveyor for now
+fixes:
+  - "/app/::"
+comment:
+  layout: "reach, diff, flags, files"
+  behavior: default
+  require_changes: false

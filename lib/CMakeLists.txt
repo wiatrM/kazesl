@@ -1,0 +1,40 @@
+##############
+## Lib configuration
+##############
+
+set (LIB_NAME "kazesl-lib")
+
+#configure directories
+set (LIBRARY_MODULE_PATH "${PROJECT_SOURCE_DIR}/lib")
+set (LIBRARY_MODULE_COMMON_PATH "${LIBRARY_MODULE_PATH}/common")
+
+set (LIBRARY_COMMON_SRC_PATH  "${LIBRARY_MODULE_COMMON_PATH}/impl" )
+set (LIBRARY_COMMON_INCLUDE_PATH  "${LIBRARY_MODULE_COMMON_PATH}")
+
+#set includes
+include_directories (${LIBRARY_MODULE_PATH} ${LIBRARY_COMMON_INCLUDE_PATH} ${THIRD_PARTY_INCLUDE_PATH})
+
+#set sources
+file (GLOB LIB_HEADER_FILES
+  "${LIBRARY_COMMON_INCLUDE_PATH}/*.hpp"
+)
+
+file (GLOB LIB_SOURCE_FILES
+  "${LIBRARY_COMMON_SRC_PATH}/*.cpp"
+)
+
+# Protobuf interface compile
+add_subdirectory (${LIBRARY_MODULE_COMMON_PATH}/proto ${LIBRARY_MODULE_COMMON_PATH}/proto/gen)
+include_directories (${LIBRARY_MODULE_COMMON_PATH}/proto/gen)
+
+#set library
+add_library (${LIB_NAME} STATIC ${LIB_SOURCE_FILES} ${LIB_HEADER_FILES})
+target_link_libraries(${LIB_NAME} kaze-proto3)
+
+#export vars
+set (LIBRARY_INCLUDE_PATH  ${LIBRARY_MODULE_PATH} PARENT_SCOPE)
+set (LIB_NAME ${LIB_NAME} PARENT_SCOPE)
+
+#test
+enable_testing ()
+add_subdirectory (common/test)

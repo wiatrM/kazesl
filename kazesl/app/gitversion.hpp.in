@@ -1,0 +1,7 @@
+#ifndef GITVERSION_H
+#define GITVERSION_H
+
+#define GIT_VERSION "@_build_version@"
+#define GIT_BRANCH "@GIT_BRANCH@"
+
+#endif
