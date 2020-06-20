@@ -10,9 +10,6 @@
 [submodule "external/spdlog"]
 	path = external/spdlog
 	url = https://github.com/gabime/spdlog
-[submodule "external/protobuf"]
-	path = external/protobuf
-	url = https://github.com/google/protobuf.git
 [submodule "external/beast"]
 	path = external/beast
 	url = https://github.com/boostorg/beast.git
