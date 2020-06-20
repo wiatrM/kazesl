@@ -58,7 +58,7 @@ add_library(kazesl-obj-test OBJECT ${TESTING_SOURCES})
 add_library(kazesl-obj OBJECT ${PROJECT_SOURCE_FILES})
 
 #set target executable
-add_executable ("${APP_NAME}" $<TARGET_OBJECTS:kazesl-obj>)
+add_executable ("${APP_NAME}" $<TARGET_OBJECTS:kazesl-obj> grpc++)
 
 #add the library
 target_link_libraries ("${APP_NAME}" kazesl-lib Threads::Threads ${THIRD_PARTY_LIBS})

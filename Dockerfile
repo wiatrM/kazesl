@@ -1,4 +1,4 @@
-FROM kazeorg/kazesl:latest
+FROM ubuntu:latest
 
 LABEL description="Kaze settlement layer"
 
@@ -23,14 +23,17 @@ RUN apt-get update \
      automake \
      autoconf \
      autoconf-archive \
+     pkg-config \
      libtool \
      libssl-dev \
-	 lcov \
-	 cmake && \
+	   lcov && \
      apt-get clean \
      libgflags-dev \
      liblz4-dev \
     && rm -rf /var/lib/apt/lists/*
+
+RUN wget -qO- "https://cmake.org/files/v3.17/cmake-3.17.3-Linux-x86_64.tar.gz" | \
+  tar --strip-components=1 -xz -C /usr/local
 
 ENV LD_LIBRARY_PATH=/libs
 ENV CPLUS_INCLUDE_PATH=/libs/include

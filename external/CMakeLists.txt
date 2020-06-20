@@ -45,16 +45,6 @@ set (ZEROMQ_INCLUDE_PATH "${ZEROMQ_ROOT}/include")
 set (JSON_ROOT "${THIRD_PARTY_MODULE_PATH}/json")
 set (JSON_INCLUDE_PATH "${JSON_ROOT}")
 
-# -------------------------------------------------------------------------
-# protobuf
-
-set (PROTOBUF_ROOT "${THIRD_PARTY_MODULE_PATH}/protobuf")
-set (PROTOBUF_INCLUDE_PATH "${PROTOBUF_ROOT}/include")
-
-set(protobuf_BUILD_TESTS OFF CACHE INTERNAL "Disable Protobuf tests")
-add_subdirectory(${PROTOBUF_ROOT}/cmake)
-find_package(Protobuf REQUIRED)
-include_directories(${PROTOBUF_INCLUDE_DIR})
 
 # -------------------------------------------------------------------------
 # boost
@@ -70,6 +60,18 @@ set (BEAST_INCLUDE_PATH "${BEAST_ROOT}/include")
 
 # -------------------------------------------------------------------------
 # rocksdb
+
+# -------------------------------------------------------------------------
+# gRPC
+
+include(FetchContent)
+FetchContent_Declare(
+  gRPC
+  GIT_REPOSITORY https://github.com/grpc/grpc
+  GIT_TAG        RELEASE_TAG_HERE  v1.29.1
+)
+set(FETCHCONTENT_QUIET OFF)
+FetchContent_MakeAvailable(gRPC)
 
 
 # -------------------------------------------------------------------------

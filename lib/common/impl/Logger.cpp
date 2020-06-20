@@ -43,7 +43,8 @@ Logger::journal(std::string name)
     std::shared_ptr<spdlog::logger> journal = spdlog::get(name);
     if (journal == nullptr)
     {
-        journal = spdlog::create(name, begin(sinks_), end(sinks_));
+        journal = std::make_shared<spdlog::logger>(name, begin(sinks_), end(sinks_));
+        //spdlog::create(name, sinks_);
     }
 
     return journal;
@@ -56,7 +57,7 @@ Logger::initAdditionalSinks()
     {
         // Init file sink
         // @TODO: this shall be configured when config class will be intruduced in another FR.
-        sinks_.push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>("general.txt", 1024*1024, 5));
+        sinks_.push_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>("logs/multisink.txt", true));
     }
 #if defined(_DEBUG) && defined(_MSC_VER)
     auto debug_sink = std::make_shared<spdlog::sinks::msvc_sink_mt>();
@@ -73,7 +74,7 @@ Logger::initGeneralLogger()
 
     if (logger_ == nullptr)
     {
-        logger_ = spdlog::create("general", begin(sinks_), end(sinks_));
+        logger_ = std::make_shared<spdlog::logger>("general", begin(sinks_), end(sinks_));
     }
 
     return logger_;
