@@ -2,14 +2,15 @@ FROM ubuntu:latest
 
 LABEL description="Kaze settlement layer"
 
+ENV TZ="America/New_York"
+
 RUN apt-get update \
-  && apt-get install -y \
+  && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
      build-essential \
      software-properties-common \
      wget
 
- #install boost
-
+#install boost
 RUN apt-get purge -qq libboost1.48-dev &&\
     apt-get install -qq libprotobuf-dev protobuf-compiler libboost-all-dev
 

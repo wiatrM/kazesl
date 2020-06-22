@@ -49,7 +49,7 @@ set (JSON_INCLUDE_PATH "${JSON_ROOT}")
 # -------------------------------------------------------------------------
 # boost
 
-find_package( Boost 1.65 COMPONENTS program_options system REQUIRED )
+find_package( Boost 1.60.0 COMPONENTS program_options system REQUIRED )
 include_directories( ${Boost_INCLUDE_DIR} )
 
 # -------------------------------------------------------------------------
@@ -66,12 +66,14 @@ set (BEAST_INCLUDE_PATH "${BEAST_ROOT}/include")
 
 include(FetchContent)
 FetchContent_Declare(
-  gRPC
-  GIT_REPOSITORY https://github.com/grpc/grpc
-  GIT_TAG        RELEASE_TAG_HERE  v1.29.1
+    grpc
+    GIT_REPOSITORY https://github.com/grpc/grpc.git
+    GIT_TAG        v1.29.1
+    GIT_PROGRESS   TRUE
 )
 set(FETCHCONTENT_QUIET OFF)
-FetchContent_MakeAvailable(gRPC)
+
+FetchContent_MakeAvailable(grpc)
 
 
 # -------------------------------------------------------------------------
@@ -94,6 +96,7 @@ set (TEST_THIRD_PARTY_INCLUDE_PATH
 #set third party libs
 set (THIRD_PARTY_LIBS
    ${Boost_LIBRARIES}
+   grpc++
 )
 
 #export vars

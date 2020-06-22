@@ -44,6 +44,7 @@ file(GLOB_RECURSE PROJECT_SOURCE_FILES
   ${APP_MODULE_PATH}/node/*.cpp
   ${APP_MODULE_PATH}/server/*.cpp
 )
+add_compile_definitions(FMT_HEADER_ONLY)
 
 set(PROJECT_SOURCE_FILES ${PROJECT_SOURCE_FILES})
 
@@ -58,7 +59,7 @@ add_library(kazesl-obj-test OBJECT ${TESTING_SOURCES})
 add_library(kazesl-obj OBJECT ${PROJECT_SOURCE_FILES})
 
 #set target executable
-add_executable ("${APP_NAME}" $<TARGET_OBJECTS:kazesl-obj> grpc++)
+add_executable ("${APP_NAME}" $<TARGET_OBJECTS:kazesl-obj>)
 
 #add the library
 target_link_libraries ("${APP_NAME}" kazesl-lib Threads::Threads ${THIRD_PARTY_LIBS})

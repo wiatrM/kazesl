@@ -7,7 +7,7 @@
 #ifndef KAZESL_LCOMMON_LOGGER
 #define KAZESL_LCOMMON_LOGGER
 
-#include <spdlog/fmt/ostr.h>
+//#include <spdlog/fmt/ostr.h>
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/basic_file_sink.h>
 

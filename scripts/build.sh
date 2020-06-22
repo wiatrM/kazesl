@@ -56,9 +56,9 @@ msg_line "Building kaze-sl project..."
 pushd /app/
 
 if [ "x$fdebug" = "xyes" ]; then
-    cmake -Bbuild -H. -DCMAKE_BUILD_TYPE=Debug
+    cmake -Bbuild -H. -DCMAKE_BUILD_TYPE=Debug -DABSL_USE_GOOGLETEST_HEAD=OFF -DBUILD_TESTING=OFF 
 else
-    cmake -Bbuild -H. -DCMAKE_BUILD_TYPE=Release
+    cmake -Bbuild -H. -DCMAKE_BUILD_TYPE=Release -DABSL_USE_GOOGLETEST_HEAD=OFF -DBUILD_TESTING=OFF
 fi
 msg_line "Cmake generated building files"
 
